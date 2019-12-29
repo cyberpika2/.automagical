@@ -1,0 +1,2 @@
+# .automagical
+random tools
