@@ -1,0 +1,6 @@
+####    ####
+# vmware mouse
+mouse.vusb.enable = "TRUE"
+mouse.vusb.useBasicMouse = "FALSE"
+
+####    ####
