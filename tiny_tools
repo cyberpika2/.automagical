@@ -15,7 +15,14 @@ sed -i "$1"' s/^#//' "$2"
 ####    kk
 # >./kk
 #!/bin/bash
-getent passwd | grep -v nologin | cut -d: -f6 | xargs grep -rm1 "^ssh-" | grep "==" | grep "@"| cut -d: -f1 | xargs comment 1,1
+getent passwd |\
+    grep -v nologin |\
+    cut -d: -f6 |\
+    xargs grep -rm1 "^ssh-" |\
+    grep "==" |\
+    grep "@"|\
+    cut -d: -f1 |\
+    xargs comment 1,1
 sudo chown root:root *
 sudo chmod 755 *
 sudo mv * /usr/bin
