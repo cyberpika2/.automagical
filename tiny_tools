@@ -38,17 +38,16 @@ dnf install -y ansible
 systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 #disable ipv6
 grub2-editenv - list |\
-  grep kernelopts |\
-  grep ipv6
-if \
-    [ $? -eq 0 ]
-      then
-    _disable_ipv6="$(grub2-editenv - list |\
     grep kernelopts |\
-    sed -e 's/$/ ipv6.disable=1/')"
-    grub2-editenv - set "$_disable_ipv6"
-    fi
-grep /etc/passwd gapscan
-su - gapscan
-ssh-keygen -t rsa -b 4096 -N "" -f /home/gapscan/.ssh/id_rsa
+    grep ipv6
+    if \
+      [ $? -eq 0 ]
+        then
+        _disable_ipv6="$(grub2-editenv - list |\
+        grep kernelopts |\
+        sed -e 's/$/ ipv6.disable=1/')"
+        grub2-editenv - set "$_disable_ipv6"
+        fi
+exit
+ssh-keygen -t rsa -b 4096 -N "" -f ~/.ssh/id_rsa
 ssh-copy-id 127.0.0.1
