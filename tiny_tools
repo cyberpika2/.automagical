@@ -44,6 +44,6 @@ grub2-editenv - list |\
         sed -e 's/$/ ipv6.disable=1/')"
         grub2-editenv - set "$_disable_ipv6"
         fi
-exit
+
 ssh-keygen -t rsa -b 4096 -N "" -f ~/.ssh/id_rsa
 ssh-copy-id 127.0.0.1
