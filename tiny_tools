@@ -2,7 +2,7 @@
 mkdir tools
 cd tools
 
-#### comment <line#>,<line#>
+#### comment <fromline#>,<toline#>
 # >./comment
 #!/bin/bash
 sed -i "$1"' s/^/#/' "$2"
@@ -12,29 +12,25 @@ sed -i "$1"' s/^/#/' "$2"
 #!/bin/bash
 sed -i "$1"' s/^#//' "$2"
 
-####    kk
-# >./kk
-#!/bin/bash
-getent passwd |\
-    grep -v nologin |\
-    cut -d: -f6 |\
-    xargs grep -rm1 "^ssh-" |\
-    grep "==" |\
-    grep "@"|\
-    cut -d: -f1 |\
-    xargs comment 1,1
-sudo chown root:root *
-sudo chmod 755 *
-sudo mv * /usr/bin
+####    kill key
 
-#### add kk to startup
+killkey(){
+    getent passwd |\
+        grep -v nologin |\
+        cut -d: -f6 |\
+        xargs grep -rm1 "^ssh-" |\
+        grep "==" |\
+        grep "@"|\
+        cut -d: -f1 |\
+        xargs comment 1,1
+        }
 
 #dep setup for ansible
 sudo su -
-dnf install -y epel-release
-dnf -y update
-dnf -y groupinstall "Server with GUI"
-dnf install -y ansible
+yum install -y epel-release
+yum -y update
+yum -y groupinstall "Server with GUI"
+yum -y install -y ansible
 systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 #disable ipv6
 grub2-editenv - list |\
